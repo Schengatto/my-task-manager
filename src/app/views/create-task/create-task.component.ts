@@ -11,29 +11,26 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
       </div>
 
       <div class="card-body">
-        <app-task-form
-          [taskForm]="taskForm"
-        ></app-task-form>
+        <app-task-form [taskForm]="taskForm"></app-task-form>
       </div>
 
-      <div class="card-footer">
-        <div id="newTaskButton" class="row justify-content-center">
-          <div class="col-1">
-            <button class="btn btn-secondary" (click)="backToTaskList($event)">
+      <div class="card-footer text-center">
+        <div id="newTaskButton">
+          <button
+            class="btn btn-secondary m-2"
+            (click)="backToTaskList($event)"
+          >
             <i class="fa fa-undo" aria-hidden="true"></i>
             <span class="ml-2">Torna alla lista</span>
-            </button>
-          </div>
-          <div class="col-1">
-            <button
-              class="btn btn-success"
-              (click)="saveCurrentTask($event)"
-              [disabled]="!taskForm.valid"
-            >
+          </button>
+          <button
+            class="btn btn-success m-2"
+            (click)="saveCurrentTask($event)"
+            [disabled]="!taskForm.valid"
+          >
             <i class="fa fa-floppy-o" aria-hidden="true"></i>
             <span class="ml-2">Salva Task</span>
-            </button>
-          </div>
+          </button>
         </div>
       </div>
     </div>

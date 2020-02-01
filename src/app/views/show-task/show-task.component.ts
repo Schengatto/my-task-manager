@@ -26,7 +26,7 @@ import { Subscription } from 'rxjs';
           </button>
           <button
             type="button"
-            class="btn btn-primary m-2"
+            class="btn btn-info m-2"
             (click)="editTask($event)"
           >
             <i class="fa fa-pencil" aria-hidden="true"></i>

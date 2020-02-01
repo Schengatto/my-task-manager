@@ -23,7 +23,7 @@ import { TaskStatus } from 'src/app/task/models/task-status.enum';
         <div class="row">
           <div *ngFor="let status of statusList" class="col-lg-4">
             <div class="list-container">
-              <div class="text-center mb-2 mt-2 text-danger">
+              <div class="text-center mb-2 text-danger">
                 <div class="new-task-btn">
                   <button
                     (click)="createNewTask($event)"
@@ -50,7 +50,7 @@ import { TaskStatus } from 'src/app/task/models/task-status.enum';
     `
       .list-container {
         border: 1px solid #138496;
-        border-radius: 0.5em;
+        border-radius: 0.25rem;
         margin: 1em 0 1em 0;
         padding: 0.5em;
         position: relative;

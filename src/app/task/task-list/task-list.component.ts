@@ -1,8 +1,11 @@
 import { Task } from './../models/task';
 import { TaskService } from './../services/task.service';
-import { Component, OnInit, Input } from '@angular/core';
-import { ArrayUtils } from './../../utils/array-utils';
-import { SearchFilters } from './../models/search-form';
+import {
+  Component,
+  OnInit,
+  Input,
+  ChangeDetectionStrategy
+} from '@angular/core';
 
 @Component({
   selector: 'app-task-list',
@@ -13,8 +16,11 @@ import { SearchFilters } from './../models/search-form';
           <li
             *ngFor="let task of tasks"
             class="list-group-item"
-            (click)="showDetails(task.id)"
             title="Dettaglio Task"
+            [ngStyle]="{
+              backgroundColor: itemBackgroundColor(task.expirationDate)
+            }"
+            (click)="showDetails(task.id)"
           >
             <div class="list-item">
               <div>
@@ -31,7 +37,9 @@ import { SearchFilters } from './../models/search-form';
         </ul>
       </ng-container>
       <ng-container *ngIf="!tasks?.length">
-        <p>Non sono presenti task.</p>
+        <div class="text-center empty-list-placeholder">
+          <small><i>Empty</i></small>
+        </div>
       </ng-container>
     </div>
   `,
@@ -47,8 +55,12 @@ import { SearchFilters } from './../models/search-form';
         display: grid;
         grid-template-columns: 100px 50% auto;
       }
+      .empty-list-placeholder {
+        color: #535353c7;
+      }
     `
-  ]
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TaskListComponent implements OnInit {
   constructor(private taskService: TaskService) {}
@@ -61,4 +73,7 @@ export class TaskListComponent implements OnInit {
     this.taskService.showTaskDetails(taskId);
   }
 
+  itemBackgroundColor(expirationDate: string): string {
+    return new Date(expirationDate) >= new Date() ? '#17f61721' : '#ff001c1c';
+  }
 }

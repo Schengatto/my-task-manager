@@ -6,11 +6,11 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
-  { path: 'tasks', component: ListComponent },
+  { path: '', component: ListComponent },
   { path: 'create', component: CreateTaskComponent },
   { path: 'edit/:id', component: EditTaskComponent },
   { path: 'details/:id', component: ShowTaskComponent },
-  { path: '**', redirectTo: 'tasks' }
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({

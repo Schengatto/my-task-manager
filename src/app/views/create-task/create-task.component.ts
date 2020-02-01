@@ -6,7 +6,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 @Component({
   template: `
     <div class="card">
-      <div class="card-header text-center">
+      <div class="card-header text-center header-bg">
         <h1>New Task</h1>
       </div>
 

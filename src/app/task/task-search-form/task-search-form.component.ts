@@ -57,7 +57,7 @@ import { SearchFilters } from './../models/search-form';
           <div class="form-group col-lg-1">
             <button
               id="searchBtn"
-              class="btn btn-block btn-warning"
+              class="btn btn-block btn-primary"
               (click)="applyFilter($event)"
             >
               <i class="fa fa-search" aria-hidden="true"></i>

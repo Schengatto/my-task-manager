@@ -7,8 +7,8 @@ import { Subscription } from 'rxjs';
 @Component({
   template: `
     <div class="card">
-      <div class="card-header text-center">
-        <h1>Dettaglio Task</h1>
+      <div class="card-header text-center header-bg">
+        <h1>Task Details</h1>
       </div>
       <div class="card-body">
         <app-task-detail *ngIf="selectedTask" [task]="selectedTask">
@@ -22,7 +22,7 @@ import { Subscription } from 'rxjs';
             (click)="backToTaskList($event)"
           >
             <i class="fa fa-undo" aria-hidden="true"></i>
-            <span class="ml-2">Torna alla lista</span>
+            <span class="ml-2">Back to List</span>
           </button>
           <button
             type="button"
@@ -30,7 +30,7 @@ import { Subscription } from 'rxjs';
             (click)="editTask($event)"
           >
             <i class="fa fa-pencil" aria-hidden="true"></i>
-            <span class="ml-2">Modifica Task</span>
+            <span class="ml-2">Edit Task</span>
           </button>
           <button
             type="button"
@@ -38,7 +38,7 @@ import { Subscription } from 'rxjs';
             (click)="deleteTask($event)"
           >
             <i class="fa fa-trash-o" aria-hidden="true"></i>
-            <span class="ml-2">Elimina Task</span>
+            <span class="ml-2">Delete Task</span>
           </button>
         </div>
       </div>

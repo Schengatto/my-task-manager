@@ -7,7 +7,7 @@ import { TaskStatus } from 'src/app/task/models/task-status.enum';
 @Component({
   template: `
     <div class="card">
-      <div class="card-header text-center text-white bg-dark">
+      <div class="card-header text-center header-bg">
         <h1>DASHBOARD</h1>
       </div>
 
@@ -27,13 +27,13 @@ import { TaskStatus } from 'src/app/task/models/task-status.enum';
                 <div class="new-task-btn">
                   <button
                     (click)="createNewTask($event)"
-                    class="btn btn-sm btn-warning"
+                    class="btn btn-sm btn-info"
                     title="Create new task"
                   >
                     <i class="fa fa-plus" aria-hidden="true"></i>
                   </button>
                 </div>
-                <div>
+                <div style="font-variant: all-small-caps;">
                   <strong>{{ status }}</strong>
                 </div>
               </div>
@@ -49,7 +49,8 @@ import { TaskStatus } from 'src/app/task/models/task-status.enum';
   styles: [
     `
       .list-container {
-        border: 1px solid #80808047;
+        border: 1px solid #138496;
+        border-radius: 0.5em;
         margin: 1em 0 1em 0;
         padding: 0.5em;
         position: relative;

@@ -21,9 +21,9 @@ export class RemainingDaysPipe implements PipeTransform {
         (1000 * 60 * 60 * 24)
     );
     return diffInDays > 0
-      ? `Mancano ${diffInDays} giorni`
+      ? `${diffInDays} days left`
       : diffInDays === 0
-      ? `Il task è scaduto`
-      : `Il task è scaduto ${Math.abs(diffInDays)} giorni fa`;
+      ? `Task Expired`
+      : `Task Expired ${Math.abs(diffInDays)} days ago`;
   }
 }

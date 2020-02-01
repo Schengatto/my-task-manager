@@ -16,6 +16,11 @@ import { TaskSearchFormComponent } from './task-search-form/task-search-form.com
     TaskSearchFormComponent
   ],
   imports: [CommonModule, ReactiveFormsModule],
-  exports: [TaskDetailComponent, TaskListComponent, TaskFormComponent]
+  exports: [
+    TaskDetailComponent,
+    TaskListComponent,
+    TaskFormComponent,
+    TaskSearchFormComponent
+  ]
 })
 export class TaskModule {}

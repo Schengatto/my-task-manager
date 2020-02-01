@@ -6,19 +6,19 @@ import { Component, OnInit, Input } from '@angular/core';
   template: `
     <div class="m-5">
       <div class="row mb-2">
-        <div class="cold-2 property">Titolo:</div>
+        <div class="cold-2 property">Title:</div>
         <div class="col-10">{{ task?.title }}</div>
       </div>
       <div class="row mb-2">
-        <div class="cold-2 property">Descrizione:</div>
+        <div class="cold-2 property">Description:</div>
         <div class="col-10">{{ task?.description }}</div>
       </div>
       <div class="row mb-2">
-        <div class="cold-2 property">Stato:</div>
+        <div class="cold-2 property">Status:</div>
         <div class="col-10">{{ task?.state }}</div>
       </div>
       <div class="row">
-        <div class="cold-2 property">Data di Scadenza:</div>
+        <div class="cold-2 property">Expiration Date:</div>
         <div class="col-10">
           {{ task?.expirationDate | date: 'dd / MM / yyyy' }}
         </div>

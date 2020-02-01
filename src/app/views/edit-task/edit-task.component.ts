@@ -10,31 +10,30 @@ import { TaskStatus } from 'src/app/task/models/task-status.enum';
   template: `
     <div class="card">
       <div class="card-header text-center">
-        <h1>Modifica Task</h1>
+        <h1>Edit Task</h1>
       </div>
 
       <div class="card-body">
         <app-task-form [taskForm]="taskForm"></app-task-form>
       </div>
 
-      <div class="card-footer">
-        <div id="newTaskButton" class="row justify-content-center">
-          <div class="col-1">
-            <button class="btn btn-secondary" (click)="backToTaskList($event)">
-              <i class="fa fa-undo" aria-hidden="true"></i>
-              <span class="ml-2">Torna alla lista</span>
-            </button>
-          </div>
-          <div class="col-1">
-            <button
-              class="btn btn-success"
-              (click)="saveCurrentTask($event)"
-              [disabled]="!taskForm.valid"
-            >
-              <i class="fa fa-floppy-o" aria-hidden="true"></i>
-              <span class="ml-2">Salva Task</span>
-            </button>
-          </div>
+      <div class="card-footer text-center">
+        <div id="newTaskButton" class="row">
+          <button
+            class="btn btn-secondary m-2"
+            (click)="backToTaskList($event)"
+          >
+            <i class="fa fa-undo" aria-hidden="true"></i>
+            <span class="ml-2">Back to List</span>
+          </button>
+          <button
+            class="btn btn-success m-2"
+            (click)="saveCurrentTask($event)"
+            [disabled]="!taskForm.valid"
+          >
+            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+            <span class="ml-2">Save Task</span>
+          </button>
         </div>
       </div>
     </div>
@@ -83,7 +82,7 @@ export class EditTaskComponent implements OnInit, OnDestroy {
 
   public saveCurrentTask(event: Event): void {
     if (this.taskForm.valid) {
-      this.taskService.editTask({
+      this.taskService.updateTask({
         id: this.taskForm.get('id').value,
         title: this.taskForm.get('title').value,
         description: this.taskForm.get('description').value,

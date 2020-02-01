@@ -10,7 +10,7 @@ import { SearchFilters } from './../models/search-form';
         <div class="form-row">
           <div class="form-group col-lg-5">
             <label for="titleOrDescription" class="col-form-label"
-              ><b>Titolo o Descrizione</b></label
+              ><b>Title or Description</b></label
             >
             <input
               class="form-control"
@@ -22,7 +22,7 @@ import { SearchFilters } from './../models/search-form';
 
           <div class="form-group col-lg-2">
             <label for="expirationDateFrom" class="col-form-label">
-              <b>Data Scadenza da</b>
+              <b>Expiration Date From</b>
             </label>
             <input
               class="form-control"
@@ -34,7 +34,7 @@ import { SearchFilters } from './../models/search-form';
 
           <div class="form-group col-lg-2">
             <label for="expirationDateTo" class="col-form-label">
-              <b>Data Scadenza a</b>
+              <b>Expiration Date To</b>
             </label>
             <input
               class="form-control"
@@ -46,22 +46,22 @@ import { SearchFilters } from './../models/search-form';
 
           <div class="form-group col-lg-2">
             <label for="orderBy" class="col-form-label">
-              <b>Ordina per</b>
+              <b>Sort By</b>
             </label>
             <select id="orderBy" class="form-control" formControlName="orderBy">
-              <option value="expirationDate" selected>Data Scadenza</option>
-              <option value="title">Titolo</option>
+              <option value="expirationDate" selected>Expiration Date</option>
+              <option value="title">Title</option>
             </select>
           </div>
 
           <div class="form-group col-lg-1">
             <button
               id="searchBtn"
-              class="btn btn-block btn-primary"
+              class="btn btn-block btn-warning"
               (click)="applyFilter($event)"
             >
               <i class="fa fa-search" aria-hidden="true"></i>
-              <span> Cerca</span>
+              <span> Search</span>
             </button>
           </div>
         </div>
@@ -70,6 +70,8 @@ import { SearchFilters } from './../models/search-form';
   `,
   styles: [
     `
+      #searchTaskFormContainer {
+      }
       #searchBtn {
         margin-top: 2.4em;
       }
@@ -96,6 +98,10 @@ export class TaskSearchFormComponent implements OnInit {
     this.applyFilter(null);
   }
 
+  /**
+   * Emit to the parent component the SearchFilters using the search form values.
+   * @param event
+   */
   applyFilter(event: Event): void {
     const filters: SearchFilters = {
       titleOrDescription: this.searchForm.get('titleOrDescription').value,

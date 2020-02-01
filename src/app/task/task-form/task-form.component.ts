@@ -9,7 +9,7 @@ import { TaskStatus } from 'src/app/task/models/task-status.enum';
       <form [formGroup]="taskForm">
         <div class="form-group">
           <label for="newTaskTitle" class="col-md-2 col-form-label"
-            ><b>Titolo</b></label
+            ><b>Title</b></label
           >
           <div class="col-md-10">
             <input
@@ -23,7 +23,7 @@ import { TaskStatus } from 'src/app/task/models/task-status.enum';
 
         <div class="form-group">
           <label for="newTaskDescription" class="col-md-2 col-form-label">
-            <b>Descrizione</b>
+            <b>Description</b>
           </label>
           <div class="col-md-10">
             <textarea
@@ -37,7 +37,7 @@ import { TaskStatus } from 'src/app/task/models/task-status.enum';
 
         <div class="form-group">
           <label for="newTaskStatus" class="col-md-2 col-form-label">
-            <b>Stato</b>
+            <b>Status</b>
           </label>
           <div class="col-md-10">
             <select
@@ -54,7 +54,7 @@ import { TaskStatus } from 'src/app/task/models/task-status.enum';
 
         <div class="form-group">
           <label for="newTaskExpirationdate" class="col-md-2 col-form-label">
-            <b>Data di Scadenza</b>
+            <b>Expiration Date</b>
           </label>
           <div class="col-md-10">
             <input

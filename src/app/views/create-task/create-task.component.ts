@@ -7,7 +7,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   template: `
     <div class="card">
       <div class="card-header text-center">
-        <h1>Creazione nuovo Task</h1>
+        <h1>New Task</h1>
       </div>
 
       <div class="card-body">
@@ -15,13 +15,13 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
       </div>
 
       <div class="card-footer text-center">
-        <div id="newTaskButton">
+        <div id="newTaskButtons">
           <button
             class="btn btn-secondary m-2"
             (click)="backToTaskList($event)"
           >
             <i class="fa fa-undo" aria-hidden="true"></i>
-            <span class="ml-2">Torna alla lista</span>
+            <span class="ml-2">Back to List</span>
           </button>
           <button
             class="btn btn-success m-2"
@@ -29,7 +29,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
             [disabled]="!taskForm.valid"
           >
             <i class="fa fa-floppy-o" aria-hidden="true"></i>
-            <span class="ml-2">Salva Task</span>
+            <span class="ml-2">Save Task</span>
           </button>
         </div>
       </div>
@@ -51,7 +51,7 @@ export class CreateTaskComponent implements OnInit {
     this.taskForm = new FormGroup({
       title: new FormControl('', Validators.required),
       description: new FormControl('', Validators.required),
-      state: new FormControl(TaskStatus.INSERITO),
+      state: new FormControl(TaskStatus.TODO),
       expirationDate: new FormControl(null, Validators.required)
     });
   }
@@ -62,11 +62,11 @@ export class CreateTaskComponent implements OnInit {
 
   public saveCurrentTask(event: Event): void {
     if (this.taskForm.valid) {
-      this.taskService.createTask({
+      this.taskService.updateTask({
         id: new Date().getTime(),
         title: this.taskForm.get('title').value,
         description: this.taskForm.get('description').value,
-        state: TaskStatus.INSERITO,
+        state: this.taskForm.get('state').value,
         expirationDate: this.taskForm.get('expirationDate').value
       });
     }

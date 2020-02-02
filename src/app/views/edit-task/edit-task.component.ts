@@ -71,7 +71,7 @@ export class EditTaskComponent implements OnInit, OnDestroy {
           ),
           state: new FormControl(taskToEdit.state),
           expirationDate: new FormControl(
-            taskToEdit.expirationDate,
+            new Date(taskToEdit.expirationDate).toISOString().substring(0, 10),
             Validators.required
           )
         });

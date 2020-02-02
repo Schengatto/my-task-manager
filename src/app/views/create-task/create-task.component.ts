@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TaskService } from './../../task/services/task.service';
-import { TaskStatus } from 'src/app/task/models/task-status.enum';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   template: `
@@ -43,17 +44,30 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
     `
   ]
 })
-export class CreateTaskComponent implements OnInit {
+export class CreateTaskComponent implements OnInit, OnDestroy {
   taskForm: FormGroup = null;
-  constructor(private taskService: TaskService) {}
+
+  private subscriptions: Subscription[] = [];
+
+  constructor(
+    private taskService: TaskService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
-    this.taskForm = new FormGroup({
-      title: new FormControl('', Validators.required),
-      description: new FormControl('', Validators.required),
-      state: new FormControl(TaskStatus.TODO),
-      expirationDate: new FormControl(null, Validators.required)
+    this.route.paramMap.subscribe(params => {
+      const taskStatus: string = params.get('taskStatus');
+      this.taskForm = new FormGroup({
+        title: new FormControl('', Validators.required),
+        description: new FormControl('', Validators.required),
+        state: new FormControl(taskStatus),
+        expirationDate: new FormControl(null, Validators.required)
+      });
     });
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(s => s.unsubscribe);
   }
 
   public backToTaskList(event: Event): void {

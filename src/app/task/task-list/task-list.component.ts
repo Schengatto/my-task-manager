@@ -1,11 +1,8 @@
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+
+import { ExpirationStatus } from '../models/expiration-status.enum';
 import { Task } from './../models/task';
 import { TaskService } from './../services/task.service';
-import {
-  Component,
-  OnInit,
-  Input,
-  ChangeDetectionStrategy
-} from '@angular/core';
 
 @Component({
   selector: 'app-task-list',
@@ -16,21 +13,28 @@ import {
           <li
             *ngFor="let task of tasks"
             class="list-group-item"
-            title="Dettaglio Task"
+            title="Task Detail"
             [ngStyle]="{
-              backgroundColor: itemBackgroundColor(task.expirationDate)
+              backgroundColor: itemBackgroundColor(task)
             }"
             (click)="showDetails(task.id)"
           >
             <div class="list-item">
               <div>
-                <i>{{ task?.expirationDate | date: 'dd/MM/yyyy' }}</i>
+                <span class="date-value">{{
+                  task?.expirationDate | date: 'dd/MM/yyyy'
+                }}</span>
               </div>
               <div>
                 <b>{{ task?.title }}</b>
               </div>
-              <div>
-                <small>{{ task?.expirationDate | remainingDays }}</small>
+              <div title="{{ task?.expirationDate | remainingDays }}">
+                <i
+                  class="fa"
+                  [ngClass]="taskStatusIcon(task)"
+                  [ngStyle]="{ color: itemBackgroundColor(task) }"
+                  aria-hidden="true"
+                ></i>
               </div>
             </div>
           </li>
@@ -53,10 +57,13 @@ import {
       }
       .list-item {
         display: grid;
-        grid-template-columns: 100px 50% auto;
+        grid-template-columns: 100px auto 1em;
       }
       .empty-list-placeholder {
         color: #535353c7;
+      }
+      .date-value {
+        font-family: monospace;
       }
     `
   ],
@@ -73,7 +80,26 @@ export class TaskListComponent implements OnInit {
     this.taskService.showTaskDetails(taskId);
   }
 
-  itemBackgroundColor(expirationDate: string): string {
-    return new Date(expirationDate) >= new Date() ? '#17f61721' : '#ff001c1c';
+  itemBackgroundColor(task: Task): string {
+    switch (task.expirationState) {
+      case ExpirationStatus.NOT_EXPIRED:
+        return '#17f61721';
+      case ExpirationStatus.ALMOST_EXPIRED:
+        return '#f5ffd58f';
+      case ExpirationStatus.EXPIRED:
+        return '#ff001c1c';
+    }
   }
+
+  taskStatusIcon(task: Task): string {
+    switch (task.expirationState) {
+      case ExpirationStatus.NOT_EXPIRED:
+        return 'fa-check text-success';
+      case ExpirationStatus.ALMOST_EXPIRED:
+        return 'fa-exclamation-triangle text-warning';
+      case ExpirationStatus.EXPIRED:
+        return 'fa-exclamation-circle text-danger';
+    }
+  }
+
 }

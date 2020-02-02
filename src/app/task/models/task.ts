@@ -1,3 +1,4 @@
+import { ExpirationStatus } from './expiration-status.enum';
 import { TaskStatus } from './task-status.enum';
 
 export interface Task {
@@ -6,4 +7,5 @@ export interface Task {
   description: string;
   state: TaskStatus;
   expirationDate: Date;
+  expirationState?: ExpirationStatus;
 }

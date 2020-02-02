@@ -8,6 +8,7 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
   { path: '', component: ListComponent },
   { path: 'create', component: CreateTaskComponent },
+  { path: 'create/:taskStatus', component: CreateTaskComponent },
   { path: 'edit/:id', component: EditTaskComponent },
   { path: 'details/:id', component: ShowTaskComponent },
   { path: '**', redirectTo: '' }

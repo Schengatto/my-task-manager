@@ -23,10 +23,10 @@ import { TaskStatus } from 'src/app/task/models/task-status.enum';
         <div class="row">
           <div *ngFor="let status of statusList" class="col-lg-4">
             <div class="list-container">
-              <div class="text-center mb-2 text-danger">
+              <div class="text-center mb-2 text-primary">
                 <div class="new-task-btn">
                   <button
-                    (click)="createNewTask($event)"
+                    (click)="createNewTask(status)"
                     class="btn btn-sm btn-info"
                     title="Create new task"
                   >
@@ -75,8 +75,8 @@ export class ListComponent implements OnInit {
     Object.values(TaskStatus).filter(status => this.statusList.push(status));
   }
 
-  createNewTask(event: Event): void {
-    this.taskService.navigateToTaskCreation();
+  createNewTask(taskStatus: string): void {
+    this.taskService.navigateToTaskCreation(taskStatus);
   }
 
   handleSearch(searchFilters: SearchFilters): void {

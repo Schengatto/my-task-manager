@@ -1,10 +1,13 @@
-import { MOCKED_TASKS } from './../../mock/tasks';
-import { TASKS_STORAGE_KEY } from '../config/contants';
-import { Task } from '../models/task';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { SearchFilters } from './../models/search-form';
+
+import { TASKS_STORAGE_KEY } from '../config/contants';
+import { ExpirationStatus } from '../models/expiration-status.enum';
+import { Task } from '../models/task';
+import { MOCKED_TASKS } from './../../mock/tasks';
 import { ArrayUtils } from './../../utils/array-utils';
+import { DateUtils } from './../../utils/date-utils';
+import { SearchFilters } from './../models/search-form';
 
 @Injectable({
   providedIn: 'root'
@@ -56,6 +59,7 @@ export class TaskService {
       tasks = ArrayUtils.orderAscByProperty(tasks, filters.orderBy);
     }
 
+    tasks = tasks.map(tsk => this.setTaskExpirationStatus(tsk));
     return tasks;
   }
 
@@ -106,10 +110,10 @@ export class TaskService {
 
   /**
    * Navigate to the task creation page.
-   * @param taskId
+   * @param taskStatus
    */
-  navigateToTaskCreation(): void {
-    this.router.navigate(['/create']);
+  navigateToTaskCreation(taskStatus: string): void {
+    this.router.navigate(['/create', taskStatus]);
   }
 
   /**
@@ -148,5 +152,19 @@ export class TaskService {
     taskList.push(task);
 
     window.localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(taskList));
+  }
+
+  private setTaskExpirationStatus(task: Task): Task {
+    const expirationDate = new Date(task.expirationDate);
+    const currentDate = new Date();
+    const diffInDays = DateUtils.daysBetweenDates(currentDate, expirationDate);
+
+    task.expirationState =
+      diffInDays > 0
+        ? ExpirationStatus.NOT_EXPIRED
+        : diffInDays === 0
+        ? ExpirationStatus.ALMOST_EXPIRED
+        : ExpirationStatus.EXPIRED;
+    return task;
   }
 }

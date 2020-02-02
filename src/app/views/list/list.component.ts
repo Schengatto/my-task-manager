@@ -6,23 +6,31 @@ import { TaskStatus } from 'src/app/task/models/task-status.enum';
 
 @Component({
   template: `
-    <div class="card">
-      <div class="card-header text-center header-bg">
-        <h1>DASHBOARD</h1>
-      </div>
-
-      <div class="card-body border-dark">
-        <div id="searchFormContainer">
+    <div>
+      <div class="page-header">
+        <div id="appNavBar">
+          <button
+            class="btn btn-sm btn-outline-light"
+            (click)="handleSearchFiltersPanel($event)"
+            title="Search Panel"
+          >
+            <i class="fa fa-search" aria-hidden="true"></i>
+          </button>
+          <h5 class="ml-2">
+            Task Manager - <span style="font-variant: unicase">DASHBOARD</span>
+          </h5>
+        </div>
+        <div *ngIf="searchFilterPanelVisible" id="searchFormContainer">
           <app-task-search-form
             (handleSearch)="handleSearch($event)"
           ></app-task-search-form>
         </div>
+      </div>
 
-        <hr />
-
+      <div class="card-body border-dark">
         <div class="row">
           <div *ngFor="let status of statusList" class="col-lg-4">
-            <div class="list-container">
+            <div class="dashboard-container">
               <div class="text-center mb-2 text-primary">
                 <div class="new-task-btn">
                   <button
@@ -37,9 +45,11 @@ import { TaskStatus } from 'src/app/task/models/task-status.enum';
                   <strong>{{ status }}</strong>
                 </div>
               </div>
-              <app-task-list
-                [tasks]="getTaskWithStatus(status)"
-              ></app-task-list>
+              <div class="task-list-container">
+                <app-task-list
+                  [tasks]="getTaskWithStatus(status)"
+                ></app-task-list>
+              </div>
             </div>
           </div>
         </div>
@@ -48,12 +58,47 @@ import { TaskStatus } from 'src/app/task/models/task-status.enum';
   `,
   styles: [
     `
-      .list-container {
+      #appNavBar {
+        display: inline-grid;
+        grid-template-columns: 2em auto;
+      }
+
+      .dashboard-container {
         border: 1px solid #138496;
         border-radius: 0.25rem;
         margin: 1em 0 1em 0;
         padding: 0.5em;
         position: relative;
+      }
+
+      .task-list-container {
+        max-height: 80vh;
+        overflow: auto;
+        padding: 0.5em;
+      }
+
+      .task-list-container::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+        background-color: #f5f5f5;
+        border-radius: 10px;
+      }
+
+      .task-list-container::-webkit-scrollbar {
+        width: 12px;
+        background-color: #f5f5f5;
+      }
+
+      .task-list-container::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background-color: #fff;
+        background-image: -webkit-gradient(
+          linear,
+          40% 0%,
+          75% 84%,
+          from(#1fa2b8a3),
+          to(#1fa2b8a3),
+          color-stop(0.6, #1fa2b8d4)
+        );
       }
 
       .new-task-btn {
@@ -68,11 +113,21 @@ import { TaskStatus } from 'src/app/task/models/task-status.enum';
 export class ListComponent implements OnInit {
   public tasksMap: Map<string, Task[]> = new Map<string, Task[]>();
   public statusList: string[] = [];
+  public searchFilterPanelVisible = false;
 
   constructor(private taskService: TaskService) {}
 
   ngOnInit() {
     Object.values(TaskStatus).filter(status => this.statusList.push(status));
+
+    // First Search on component init
+    const filters: SearchFilters = {
+      titleOrDescription: null,
+      expirationDateFrom: null,
+      expirationDateTo: null,
+      orderBy: 'expirationDate'
+    };
+    this.handleSearch(filters);
   }
 
   createNewTask(taskStatus: string): void {
@@ -91,5 +146,9 @@ export class ListComponent implements OnInit {
 
   getTaskWithStatus(status: string): Task[] {
     return this.tasksMap.get(status);
+  }
+
+  handleSearchFiltersPanel(event: Event): void {
+    this.searchFilterPanelVisible = !this.searchFilterPanelVisible;
   }
 }

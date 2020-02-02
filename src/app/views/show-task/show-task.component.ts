@@ -6,19 +6,15 @@ import { Subscription } from 'rxjs';
 
 @Component({
   template: `
-    <div class="card">
-      <div class="card-header text-center header-bg">
-        <h1>Task Details</h1>
-      </div>
-      <div class="card-body">
-        <app-task-detail *ngIf="selectedTask" [task]="selectedTask">
-        </app-task-detail>
-      </div>
-      <div class="card-footer text-center">
+    <div>
+      <div id="appNavBar" class="page-header">
+        <h4 class="ml-2">
+          <span style="font-variant: unicase">TASK DETAIL</span>
+        </h4>
         <div>
           <button
             type="button"
-            class="btn btn-secondary m-2"
+            class="btn btn-sm btn-secondary m-2"
             (click)="backToTaskList($event)"
           >
             <i class="fa fa-undo" aria-hidden="true"></i>
@@ -26,25 +22,37 @@ import { Subscription } from 'rxjs';
           </button>
           <button
             type="button"
-            class="btn btn-info m-2"
+            class="btn btn-sm btn-warning m-2"
             (click)="editTask($event)"
           >
             <i class="fa fa-pencil" aria-hidden="true"></i>
-            <span class="ml-2">Edit Task</span>
+            <span class="ml-2">Edit</span>
           </button>
           <button
             type="button"
-            class="btn btn-danger m-2"
+            class="btn btn-sm btn-danger m-2"
             (click)="deleteTask($event)"
           >
             <i class="fa fa-trash-o" aria-hidden="true"></i>
-            <span class="ml-2">Delete Task</span>
+            <span class="ml-2">Delete</span>
           </button>
         </div>
       </div>
+      <div>
+        <app-task-detail *ngIf="selectedTask" [task]="selectedTask">
+        </app-task-detail>
+      </div>
     </div>
   `,
-  styles: []
+  styles: [
+    `
+      #appNavBar {
+        display: inline-grid;
+        width: 100%;
+        grid-template-columns: auto 18.5em;
+      }
+    `
+  ]
 })
 export class ShowTaskComponent implements OnInit, OnDestroy {
   public selectedTask: Task = null;

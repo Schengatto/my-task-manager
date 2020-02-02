@@ -8,32 +8,44 @@ import { TaskStatus } from 'src/app/task/models/task-status.enum';
 
 @Component({
   template: `
-    <div class="card">
-      <div class="card-header text-center header-bg">
-        <h1>Edit Task</h1>
+    <div>
+      <div id="appNavBar" class="page-header">
+        <h4 class="ml-2">
+          <span style="font-variant: unicase">EDIT TASK</span>
+        </h4>
+        <div>
+          <button
+            class="btn btn-sm btn-secondary m-2"
+            (click)="backToTaskList($event)"
+          >
+            <i class="fa fa-undo" aria-hidden="true"></i>
+            <span class="ml-2">Back to List</span>
+          </button>
+          <button
+            class="btn btn-sm btn-success m-2"
+            (click)="saveCurrentTask($event)"
+            [disabled]="!taskForm.valid"
+          >
+            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+            <span class="ml-2">Save</span>
+          </button>
+        </div>
       </div>
 
-      <div class="card-body">
+      <div>
         <app-task-form [taskForm]="taskForm"></app-task-form>
-      </div>
-
-      <div class="card-footer text-center">
-        <button class="btn btn-secondary m-2" (click)="backToTaskList($event)">
-          <i class="fa fa-undo" aria-hidden="true"></i>
-          <span class="ml-2">Back to List</span>
-        </button>
-        <button
-          class="btn btn-success m-2"
-          (click)="saveCurrentTask($event)"
-          [disabled]="!taskForm.valid"
-        >
-          <i class="fa fa-floppy-o" aria-hidden="true"></i>
-          <span class="ml-2">Save Task</span>
-        </button>
       </div>
     </div>
   `,
-  styles: []
+  styles: [
+    `
+      #appNavBar {
+        display: inline-grid;
+        width: 100%;
+        grid-template-columns: auto 13em;
+      }
+    `
+  ]
 })
 export class EditTaskComponent implements OnInit, OnDestroy {
   taskForm: FormGroup = null;

@@ -7,9 +7,9 @@ import { SearchFilters } from './../models/search-form';
   template: `
     <div id="searchTaskFormContainer">
       <form [formGroup]="searchForm">
-        <div class="form-row">
-          <div class="form-group col-lg-5">
-            <label for="titleOrDescription" class="col-form-label"
+        <div class="form row">
+          <div class="form-group input-group-sm col-lg-4">
+            <label for="titleOrDescription" class="col-form-label form-sm"
               ><b>Title or Description</b></label
             >
             <input
@@ -20,7 +20,7 @@ import { SearchFilters } from './../models/search-form';
             />
           </div>
 
-          <div class="form-group col-lg-2">
+          <div class="form-group input-group-sm col-lg-2">
             <label for="expirationDateFrom" class="col-form-label">
               <b>Expiration Date From</b>
             </label>
@@ -32,7 +32,7 @@ import { SearchFilters } from './../models/search-form';
             />
           </div>
 
-          <div class="form-group col-lg-2">
+          <div class="form-group input-group-sm col-lg-2">
             <label for="expirationDateTo" class="col-form-label">
               <b>Expiration Date To</b>
             </label>
@@ -44,7 +44,7 @@ import { SearchFilters } from './../models/search-form';
             />
           </div>
 
-          <div class="form-group col-lg-2">
+          <div class="form-group input-group-sm col-lg-2">
             <label for="orderBy" class="col-form-label">
               <b>Sort By</b>
             </label>
@@ -54,14 +54,14 @@ import { SearchFilters } from './../models/search-form';
             </select>
           </div>
 
-          <div class="form-group col-lg-1">
+          <div class="form-group col-lg-2">
             <button
               id="searchBtn"
-              class="btn btn-block btn-info"
+              class="btn btn-sm btn-block btn-warning"
               (click)="applyFilter($event)"
             >
               <i class="fa fa-search" aria-hidden="true"></i>
-              <span> Search</span>
+              <span><strong> Search</strong></span>
             </button>
           </div>
         </div>
@@ -71,9 +71,10 @@ import { SearchFilters } from './../models/search-form';
   styles: [
     `
       #searchTaskFormContainer {
+        font-size: 0.7em;
       }
       #searchBtn {
-        margin-top: 2.4em;
+        margin-top: 2.1em;
       }
     `
   ]
@@ -94,8 +95,6 @@ export class TaskSearchFormComponent implements OnInit {
       expirationDateTo: new FormControl(''),
       orderBy: new FormControl('expirationDate')
     });
-
-    this.applyFilter(null);
   }
 
   /**

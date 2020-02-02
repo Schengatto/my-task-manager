@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit
+} from '@angular/core';
 
 import { ExpirationStatus } from '../models/expiration-status.enum';
 import { Task } from './../models/task';
@@ -25,7 +30,7 @@ import { TaskService } from './../services/task.service';
                   task?.expirationDate | date: 'dd/MM/yyyy'
                 }}</span>
               </div>
-              <div>
+              <div class="task-title">
                 <b>{{ task?.title }}</b>
               </div>
               <div title="{{ task?.expirationDate | remainingDays }}">
@@ -65,6 +70,11 @@ import { TaskService } from './../services/task.service';
       .date-value {
         font-family: monospace;
       }
+      .task-title {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
     `
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -101,5 +111,4 @@ export class TaskListComponent implements OnInit {
         return 'fa-exclamation-circle text-danger';
     }
   }
-
 }

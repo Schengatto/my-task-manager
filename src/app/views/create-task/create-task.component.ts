@@ -6,26 +6,21 @@ import { Subscription } from 'rxjs';
 
 @Component({
   template: `
-    <div class="card">
-      <div class="card-header text-center header-bg">
-        <h1>New Task</h1>
-      </div>
-
-      <div class="card-body">
-        <app-task-form [taskForm]="taskForm"></app-task-form>
-      </div>
-
-      <div class="card-footer text-center">
+    <div>
+      <div id="appNavBar" class="page-header">
+        <h4 class="ml-2">
+         <span style="font-variant: unicase">NEW TASK</span>
+        </h4>
         <div id="newTaskButtons">
           <button
-            class="btn btn-secondary m-2"
+            class="btn btn-sm btn-secondary m-2"
             (click)="backToTaskList($event)"
           >
             <i class="fa fa-undo" aria-hidden="true"></i>
             <span class="ml-2">Back to List</span>
           </button>
           <button
-            class="btn btn-success m-2"
+            class="btn btn-sm btn-success m-2"
             (click)="saveCurrentTask($event)"
             [disabled]="!taskForm.valid"
           >
@@ -34,10 +29,20 @@ import { Subscription } from 'rxjs';
           </button>
         </div>
       </div>
+
+      <div>
+        <app-task-form [taskForm]="taskForm"></app-task-form>
+      </div>
     </div>
   `,
   styles: [
     `
+      #appNavBar {
+        display: inline-grid;
+        width: 100%;
+        grid-template-columns: auto 15em;
+      }
+
       textarea {
         resize: none;
       }

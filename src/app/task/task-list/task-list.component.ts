@@ -5,9 +5,10 @@ import {
   OnInit
 } from '@angular/core';
 
-import { ExpirationStatus } from '../models/expiration-status.enum';
 import { Task } from './../models/task';
 import { TaskService } from './../services/task.service';
+import { TaskUtils } from './../utils/task-utils';
+import { TaskStatus } from '../models/task-status.enum';
 
 @Component({
   selector: 'app-task-list',
@@ -57,12 +58,13 @@ import { TaskService } from './../services/task.service';
       .list-group-item {
         cursor: pointer;
       }
+
       .list-group-item:hover {
         background-color: cornsilk;
       }
       .list-item {
         display: grid;
-        grid-template-columns: 100px auto 1em;
+        grid-template-columns: 100px auto 1.5em;
       }
       .empty-list-placeholder {
         color: #535353c7;
@@ -91,24 +93,18 @@ export class TaskListComponent implements OnInit {
   }
 
   itemBackgroundColor(task: Task): string {
-    switch (task.expirationState) {
-      case ExpirationStatus.NOT_EXPIRED:
-        return '#17f61721';
-      case ExpirationStatus.ALMOST_EXPIRED:
-        return '#f5ffd58f';
-      case ExpirationStatus.EXPIRED:
-        return '#ff001c1c';
-    }
+    return TaskUtils.taskBackgroundColor(task);
   }
 
   taskStatusIcon(task: Task): string {
-    switch (task.expirationState) {
-      case ExpirationStatus.NOT_EXPIRED:
-        return 'fa-check text-success';
-      case ExpirationStatus.ALMOST_EXPIRED:
-        return 'fa-exclamation-triangle text-warning';
-      case ExpirationStatus.EXPIRED:
-        return 'fa-exclamation-circle text-danger';
-    }
+    return TaskUtils.taskStatusIcon(task);
+  }
+
+  get firstTaskStatus(): string {
+    return TaskUtils.taskStatusValues()[0];
+  }
+
+  get lastTaskStatus(): string {
+    return TaskUtils.taskStatusValues().pop();
   }
 }

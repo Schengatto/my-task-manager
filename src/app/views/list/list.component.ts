@@ -17,7 +17,7 @@ import { TaskStatus } from 'src/app/task/models/task-status.enum';
             <i class="fa fa-search" aria-hidden="true"></i>
           </button>
           <h5 class="ml-2">
-            Task Manager - <span style="font-variant: unicase">DASHBOARD</span>
+            Task Manager - <span style="font-variant: all-small-caps">DASHBOARD</span>
           </h5>
         </div>
         <div *ngIf="searchFilterPanelVisible" id="searchFormContainer">

@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
     <div>
       <div id="appNavBar" class="page-header">
         <h4 class="ml-2">
-         <span style="font-variant: unicase">NEW TASK</span>
+         <span style="font-variant: all-small-caps">NEW TASK</span>
         </h4>
         <div id="newTaskButtons">
           <button
@@ -17,7 +17,7 @@ import { Subscription } from 'rxjs';
             (click)="backToTaskList($event)"
           >
             <i class="fa fa-undo" aria-hidden="true"></i>
-            <span class="ml-2">Back to List</span>
+            <span class="ml-2">Back</span>
           </button>
           <button
             class="btn btn-sm btn-success m-2"
@@ -25,7 +25,7 @@ import { Subscription } from 'rxjs';
             [disabled]="!taskForm.valid"
           >
             <i class="fa fa-floppy-o" aria-hidden="true"></i>
-            <span class="ml-2">Save Task</span>
+            <span class="ml-2">Save</span>
           </button>
         </div>
       </div>
@@ -40,7 +40,7 @@ import { Subscription } from 'rxjs';
       #appNavBar {
         display: inline-grid;
         width: 100%;
-        grid-template-columns: auto 15em;
+        grid-template-columns: auto 11em;
       }
 
       textarea {

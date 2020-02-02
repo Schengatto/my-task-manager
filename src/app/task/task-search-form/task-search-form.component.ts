@@ -60,8 +60,7 @@ import { SearchFilters } from './../models/search-form';
               class="btn btn-sm btn-block btn-warning"
               (click)="applyFilter($event)"
             >
-              <i class="fa fa-search" aria-hidden="true"></i>
-              <span><strong> Search</strong></span>
+              <span><strong>Apply</strong></span>
             </button>
           </div>
         </div>

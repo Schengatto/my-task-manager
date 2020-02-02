@@ -11,7 +11,7 @@ import { TaskStatus } from 'src/app/task/models/task-status.enum';
     <div>
       <div id="appNavBar" class="page-header">
         <h4 class="ml-2">
-          <span style="font-variant: unicase">EDIT TASK</span>
+          <span style="font-variant: all-small-caps">EDIT TASK</span>
         </h4>
         <div>
           <button
@@ -19,7 +19,7 @@ import { TaskStatus } from 'src/app/task/models/task-status.enum';
             (click)="backToTaskList($event)"
           >
             <i class="fa fa-undo" aria-hidden="true"></i>
-            <span class="ml-2">Back to List</span>
+            <span class="ml-2">Back</span>
           </button>
           <button
             class="btn btn-sm btn-success m-2"
@@ -42,7 +42,7 @@ import { TaskStatus } from 'src/app/task/models/task-status.enum';
       #appNavBar {
         display: inline-grid;
         width: 100%;
-        grid-template-columns: auto 13em;
+        grid-template-columns: auto 11em;
       }
     `
   ]

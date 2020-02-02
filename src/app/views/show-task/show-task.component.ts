@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
     <div>
       <div id="appNavBar" class="page-header">
         <h4 class="ml-2">
-          <span style="font-variant: unicase">TASK DETAIL</span>
+          <span style="font-variant: all-small-caps">TASK DETAIL</span>
         </h4>
         <div>
           <button
@@ -18,7 +18,7 @@ import { Subscription } from 'rxjs';
             (click)="backToTaskList($event)"
           >
             <i class="fa fa-undo" aria-hidden="true"></i>
-            <span class="ml-2">Back to List</span>
+            <span class="ml-2">Back</span>
           </button>
           <button
             type="button"
@@ -49,7 +49,7 @@ import { Subscription } from 'rxjs';
       #appNavBar {
         display: inline-grid;
         width: 100%;
-        grid-template-columns: auto 18.5em;
+        grid-template-columns: auto 16em;
       }
     `
   ]

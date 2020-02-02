@@ -17,10 +17,16 @@ import { Component, OnInit, Input } from '@angular/core';
         <div class="cold-2 property">Status:</div>
         <div class="col-10">{{ task?.state }}</div>
       </div>
-      <div class="row">
+      <div class="row mb-2">
         <div class="cold-2 property">Expiration Date:</div>
         <div class="col-10">
           {{ task?.expirationDate | date: 'dd / MM / yyyy' }}
+        </div>
+      </div>
+      <div class="row">
+        <div class="cold-2 property">Expiration Info:</div>
+        <div class="col-10">
+          {{ task?.expirationDate | remainingDays }}
         </div>
       </div>
     </div>

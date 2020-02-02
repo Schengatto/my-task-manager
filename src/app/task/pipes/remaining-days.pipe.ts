@@ -10,9 +10,9 @@ export class RemainingDaysPipe implements PipeTransform {
     const expirationDate: Date = new Date(value);
     const diffInDays = DateUtils.daysBetweenDates(currentDate, expirationDate);
     return diffInDays > 0
-      ? `${diffInDays} days left`
+      ? `This Task will expire in ${diffInDays} days`
       : diffInDays === 0
       ? `This Task expires today`
-      : `Task Expired ${Math.abs(diffInDays)} days ago`;
+      : `This Task expired ${Math.abs(diffInDays)} days ago`;
   }
 }

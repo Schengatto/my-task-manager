@@ -2,7 +2,7 @@ FROM node:alpine
 
 RUN npm i -g @angular/cli@8.3.23
 
-COPY ./package.json ./app
+COPY ./package.json ./app/
 
 WORKDIR ./app
 

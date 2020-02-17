@@ -1,11 +1,14 @@
 FROM node:alpine
 
-COPY ./package.json /app/
+RUN npm i -g @angular/cli@8.3.23
 
-WORKDIR /app/
+COPY ./package.json ./app
+
+WORKDIR ./app
 
 RUN npm install 
 
 COPY . .
 
-CMD ["npm", "run", "start"]
+RUN npm run build
+

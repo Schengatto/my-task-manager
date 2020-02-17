@@ -1,0 +1,9 @@
+sudo: required
+services:
+    - docker
+
+before_install:
+    - docker build -t schengatto/angular-task-manager:latest -f Dockerfile.dev .
+
+script:
+    - docker run schengatto/angular-task-manager:latest
